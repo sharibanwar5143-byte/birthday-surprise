@@ -1,0 +1,3274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Birthday Surprise</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body> 
+  
+  <audio id="birthdaySong"></audio>
+
+    <!-- =========================
+         OPENING SCREEN
+    ========================== -->
+
+    <div class="opening-screen" id="openingScreen">
+
+        <div class="small-text">
+            A SURPRISE FOR
+        </div>
+
+        <h1 id="recipientName">YOU</h1>
+
+        <p class="made-by">
+            Made with love by
+            <span id="senderName">Someone</span>
+        </p>
+
+        <div class="gift-container" id="gift">
+
+            <div class="gift-box">
+                <div class="gift-lid"></div>
+                <div class="gift-body"></div>
+                <div class="gift-ribbon vertical"></div>
+                <div class="gift-ribbon horizontal"></div>
+            </div>
+
+            <div class="gift-glow"></div>
+
+        </div>
+
+        <p class="unwrap-text">
+            Tap the gift to unwrap it 🎁
+        </p>
+
+        <button
+            class="unwrap-button"
+            onclick="unwrapGift()"
+        >
+            UNWRAP IT 🎁
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         NEXT SCREEN
+    ========================== -->
+
+    <div class="next-screen" id="nextScreen">
+
+        <div class="heart-burst">
+            ❤️
+        </div>
+
+        <h1>
+            Something special<br>
+            is waiting for you...
+        </h1>
+
+        <button onclick="goTo()">
+    Continue ✨
+        </button>
+
+    </div>
+
+  <!-- BIRTHDAY DATE UNLOCK -->
+<section class="birthday-lock-screen" id="birthdayLockScreen">
+
+    <div class="birthday-lock-card">
+
+        <div class="lock-icon">🔐</div>
+
+        <h1>One little secret first…</h1>
+
+        <p class="lock-question">
+            When is your special day?
+        </p>
+
+        <p class="lock-subtitle">
+            Enter your birthday to unlock your surprise ✨
+        </p>
+
+        <div class="date-inputs">
+
+            <input
+                type="text"
+                id="birthdayDay"
+                placeholder="DD"
+                maxlength="2"
+                inputmode="numeric"
+            >
+
+            <span>/</span>
+
+            <input
+                type="text"
+                id="birthdayMonth"
+                placeholder="MM"
+                maxlength="2"
+                inputmode="numeric"
+            >
+
+        </div>
+
+        <button
+            class="unlock-birthday-button"
+            onclick="checkBirthdayDate()"
+        >
+            Unlock the surprise 🔓
+        </button>
+
+        <p
+            class="birthday-error"
+            id="birthdayError"
+        ></p>
+
+    </div>
+
+</section>
+
+
+    <!-- =========================
+         CUPID SCREEN
+    ========================== -->
+
+    <div class="cupid-screen" id="cupidScreen">
+
+        <p class="cupid-small">
+            A LITTLE SOMETHING FOR YOU
+        </p>
+
+        <h1>
+            Send some love ❤️
+        </h1>
+
+        <p class="cupid-instruction">
+            Pull the arrow back<br>
+            and release it toward the heart
+        </p>
+
+
+        <div class="cupid-game" id="cupidGame">
+
+            <!-- TARGET HEART -->
+
+            <div
+                class="target-heart"
+                id="targetHeart"
+            >
+                ❤️
+            </div>
+
+
+            <!-- BOW -->
+
+            <div
+                class="bow"
+                id="bow"
+            >
+
+                <svg
+    viewBox="0 0 120 240"
+    class="bow-svg"
+    aria-hidden="true"
+>
+    <defs>
+        <linearGradient id="bowGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fff4c7"/>
+            <stop offset="35%" stop-color="#ffd76a"/>
+            <stop offset="70%" stop-color="#d99525"/>
+            <stop offset="100%" stop-color="#fff0a8"/>
+        </linearGradient>
+
+        <linearGradient id="bowPearl" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="50%" stop-color="#ffeaf5"/>
+            <stop offset="100%" stop-color="#f7b7d5"/>
+        </linearGradient>
+
+        <linearGradient id="bowPink" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff8fbd"/>
+            <stop offset="50%" stop-color="#ff3f91"/>
+            <stop offset="100%" stop-color="#c91662"/>
+        </linearGradient>
+
+        <filter id="bowGlow">
+            <feGaussianBlur stdDeviation="1.8"/>
+        </filter>
+    </defs>
+
+    <!-- Soft magical glow -->
+    <path
+        d="M55 18
+           C8 45, 8 92, 55 120
+           C8 148, 8 195, 55 222"
+        fill="none"
+        stroke="#ff7eb5"
+        stroke-width="16"
+        opacity=".22"
+        filter="url(#bowGlow)"
+    />
+
+    <!-- Main white/pink bow -->
+    <path
+        d="M55 18
+           C8 45, 8 92, 55 120"
+        fill="none"
+        stroke="url(#bowPearl)"
+        stroke-width="13"
+        stroke-linecap="round"
+    />
+
+    <path
+        d="M55 120
+           C8 148, 8 195, 55 222"
+        fill="none"
+        stroke="url(#bowPearl)"
+        stroke-width="13"
+        stroke-linecap="round"
+    />
+
+    <!-- Golden outer trim -->
+    <path
+        d="M55 18
+           C8 45, 8 92, 55 120"
+        fill="none"
+        stroke="url(#bowGold)"
+        stroke-width="3"
+        stroke-linecap="round"
+    />
+
+    <path
+        d="M55 120
+           C8 148, 8 195, 55 222"
+        fill="none"
+        stroke="url(#bowGold)"
+        stroke-width="3"
+        stroke-linecap="round"
+    />
+
+    <!-- Pink inner highlight -->
+    <path
+        d="M49 27
+           C20 51, 19 84, 50 108"
+        fill="none"
+        stroke="#ff8fc1"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        opacity=".9"
+    />
+
+    <path
+        d="M50 132
+           C19 156, 20 189, 49 213"
+        fill="none"
+        stroke="#ff8fc1"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        opacity=".9"
+    />
+
+    <!-- Elegant golden curls -->
+    <path
+        d="M38 49
+           C28 55, 32 64, 40 61
+           C46 58, 43 52, 39 55"
+        fill="none"
+        stroke="url(#bowGold)"
+        stroke-width="2.2"
+        stroke-linecap="round"
+    />
+
+    <path
+        d="M38 191
+           C28 185, 32 176, 40 179
+           C46 182, 43 188, 39 185"
+        fill="none"
+        stroke="url(#bowGold)"
+        stroke-width="2.2"
+        stroke-linecap="round"
+    />
+
+    <!-- Grip -->
+    <rect
+        x="44"
+        y="101"
+        width="22"
+        height="38"
+        rx="10"
+        fill="url(#bowGold)"
+    />
+
+    <rect
+        x="47"
+        y="104"
+        width="16"
+        height="32"
+        rx="7"
+        fill="url(#bowPink)"
+    />
+
+    <!-- Grip wrapping -->
+    <path
+        d="M47 109 L63 105
+           M47 115 L63 111
+           M47 121 L63 117
+           M47 127 L63 123
+           M47 133 L63 129"
+        stroke="#ffd1e5"
+        stroke-width="2"
+        opacity=".8"
+    />
+
+    <!-- Heart ornaments -->
+    <path
+        d="M22 38
+           C18 33, 10 37, 14 44
+           L22 52
+           L30 44
+           C34 37, 26 33, 22 38Z"
+        fill="url(#bowPink)"
+        stroke="url(#bowGold)"
+        stroke-width="2"
+    />
+
+    <path
+        d="M22 188
+           C18 183, 10 187, 14 194
+           L22 202
+           L30 194
+           C34 187, 26 183, 22 188Z"
+        fill="url(#bowPink)"
+        stroke="url(#bowGold)"
+        stroke-width="2"
+    />
+
+    <!-- Small heart at top -->
+    <path
+        d="M55 9
+           C51 3, 42 7, 46 14
+           L55 23
+           L64 14
+           C68 7, 59 3, 55 9Z"
+        fill="url(#bowPink)"
+        stroke="url(#bowGold)"
+        stroke-width="2"
+    />
+                </svg>
+
+
+                <!-- Bow string -->
+
+                <div
+                    class="bow-string"
+                    id="bowString"
+                ></div>
+
+            </div>
+
+
+            <!-- ARROW -->
+
+            <div
+                class="arrow"
+                id="arrow"
+            >
+
+                <svg
+    viewBox="0 0 160 24"
+    class="arrow-svg"
+    aria-hidden="true"
+>
+    <defs>
+        <linearGradient id="arrowGold" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#fff0a8"/>
+            <stop offset="45%" stop-color="#e7a52d"/>
+            <stop offset="70%" stop-color="#ffd96b"/>
+            <stop offset="100%" stop-color="#fff3bd"/>
+        </linearGradient>
+
+        <linearGradient id="arrowPink" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff9ac6"/>
+            <stop offset="55%" stop-color="#ff3f91"/>
+            <stop offset="100%" stop-color="#c91462"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Golden shaft -->
+    <line
+        x1="8"
+        y1="12"
+        x2="132"
+        y2="12"
+        stroke="url(#arrowGold)"
+        stroke-width="5"
+        stroke-linecap="round"
+    />
+
+    <!-- Pink shaft highlight -->
+    <line
+        x1="22"
+        y1="10"
+        x2="116"
+        y2="10"
+        stroke="#fff1f8"
+        stroke-width="1.5"
+        opacity=".8"
+    />
+
+    <!-- Heart-shaped arrow tip -->
+    <path
+        d="M128 12
+           C123 7, 126 2, 132 5
+           L141 10
+           L150 5
+           C156 2, 159 7, 154 12
+           L141 22
+           Z"
+        fill="url(#arrowPink)"
+        stroke="url(#arrowGold)"
+        stroke-width="2"
+    />
+
+    <!-- Arrow tip shine -->
+    <path
+        d="M132 7
+           C134 6, 136 7, 138 9"
+        fill="none"
+        stroke="#fff"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        opacity=".8"
+    />
+
+    <!-- Pink feather -->
+    <path
+        d="M14 12
+           C8 10, 5 5, 2 3
+           C4 10, 4 14, 2 21
+           C6 18, 10 15, 14 12Z"
+        fill="url(#arrowPink)"
+        stroke="url(#arrowGold)"
+        stroke-width="1.5"
+    />
+
+    <!-- Feather detail -->
+    <path
+        d="M5 7 L13 12 L5 17"
+        fill="none"
+        stroke="#ffe7f2"
+        stroke-width="1.5"
+        opacity=".85"
+    />
+
+    <!-- Tiny heart detail -->
+    <path
+        d="M20 12
+           C18 9, 14 11, 16 14
+           L20 18
+           L24 14
+           C26 11, 22 9, 20 12Z"
+        fill="#ff4b97"
+        stroke="#ffd76a"
+        stroke-width="1"
+    />
+                </svg>
+
+            </div>
+
+
+            <!-- PULL HANDLE -->
+
+            <div
+                class="pull-point"
+                id="pullPoint"
+            >
+                ❤️
+            </div>
+
+        </div>
+
+
+        <p
+            class="pull-text"
+            id="pullText"
+        >
+            PULL & RELEASE
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+     BIRTHDAY REVEAL
+========================== -->
+
+<div
+    class="birthday-reveal"
+    id="birthdayReveal"
+>
+
+    <!-- Dreamy background glow -->
+    <div class="reveal-bokeh bokeh-1"></div>
+    <div class="reveal-bokeh bokeh-2"></div>
+    <div class="reveal-bokeh bokeh-3"></div>
+    <div class="reveal-bokeh bokeh-4"></div>
+
+    <!-- Floating hearts -->
+    <div class="reveal-heart heart-1">♥</div>
+    <div class="reveal-heart heart-2">♥</div>
+    <div class="reveal-heart heart-3">♥</div>
+    <div class="reveal-heart heart-4">♥</div>
+    <div class="reveal-heart heart-5">♥</div>
+
+    <!-- Sparkles -->
+    <div class="reveal-sparkle sparkle-1">✦</div>
+    <div class="reveal-sparkle sparkle-2">✧</div>
+    <div class="reveal-sparkle sparkle-3">✦</div>
+    <div class="reveal-sparkle sparkle-4">✧</div>
+    <div class="reveal-sparkle sparkle-5">✦</div>
+
+    <div class="reveal-content">
+
+        <p class="wish-text">
+            make a wish...
+        </p>
+
+        <div class="reveal-line"></div>
+
+        <h1>
+            Before we go<br>
+            any further…
+        </h1>
+
+        <div class="name-ribbon">
+            <span
+                class="reveal-name"
+                id="revealName"
+            ></span>
+        </div>
+
+        <p class="reveal-message">
+            Close your eyes for a moment,<br>
+            make a little wish,<br>
+            and let the magic begin ✨
+        </p>
+
+        <button
+            class="reveal-button"
+            onclick="continueBirthday()"
+        >
+            Continue <span>♥</span>
+        </button>
+
+    </div>
+
+</div>
+  <!-- HEART TREE SCREEN -->
+<section id="treeScreen" class="tree-screen">
+<div class="tree-butterflies">
+
+    <div class="real-butterfly butterfly-1">
+        <img src="pink-glowing-butterfly.png" alt="">
+    </div>
+
+    <div class="real-butterfly butterfly-2">
+        <img src="pink-glowing-butterfly.png" alt="">
+    </div>
+
+    <div class="real-butterfly butterfly-3">
+        <img src="pink-glowing-butterfly.png" alt="">
+    </div>
+
+    <div class="real-butterfly butterfly-4">
+        <img src="pink-glowing-butterfly.png" alt="">
+    </div>
+
+</div>
+  <div id="treeFireworksLayer"></div>
+  <div id="treeMemoryPhotos"></div>
+
+    <div id="birthdayMagic" class="tree-birthday-magic"></div>
+
+    <div class="tree-glow"></div>
+
+    <div class="beautiful-tree">
+        <img
+            src="birthday-tree.png"
+            class="birthday-tree-background"
+            alt="Birthday tree"
+        >
+    </div>
+
+
+
+  <!-- =================================
+     5 MEMORY PHOTOS ON TREE
+================================= -->
+
+
+    <!-- Dynamic recipient name -->
+    <h1 class="tree-name">
+        <span id="treeName">You</span> <span class="tree-heart">💖</span>
+    </h1>
+
+    <!-- Dynamic age -->
+    <p class="tree-age">
+        and just like that,<br>
+       you're turning another beautiful year older
+        <strong id="treeAge">20</strong> ✨
+    </p>
+
+    <!-- Continue button -->
+    <button class="tree-button" onclick="goToCake()">
+        Continue 💕
+    </button>
+
+</section>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script src="script.js"></script>
+
+    <script>
+
+        /* =========================
+           LOAD BIRTHDAY DATA
+        ========================= */
+
+        const data =
+    getBirthdayData();
+
+
+        document.getElementById(
+            "recipientName"
+        ).textContent =
+            data.recipient || "YOU";
+
+
+        document.getElementById(
+            "senderName"
+        ).textContent =
+            data.sender || "Someone";
+
+
+        /* =========================
+           UNWRAP GIFT
+        ========================== */
+
+        function unwrapGift() {
+          
+
+    const gift =
+        document.getElementById("gift");
+
+    if (gift) {
+        gift.classList.add("opened");
+    }
+
+    const button =
+        document.querySelector(".unwrap-button");
+
+    if (button) {
+        button.disabled = true;
+    }
+
+    setTimeout(function() {
+
+        const openingScreen =
+            document.getElementById("openingScreen");
+
+        if (openingScreen) {
+            openingScreen.classList.add("fade-out");
+        }
+
+        setTimeout(function() {
+
+            if (openingScreen) {
+                openingScreen.style.display = "none";
+            }
+
+            const nextScreen =
+                document.getElementById("nextScreen");
+
+            if (nextScreen) {
+                nextScreen.style.display = "flex";
+                nextScreen.classList.add("show");
+            }
+
+        }, 800);
+
+    }, 1200);
+        }
+
+
+        /* =========================
+           GO TO 
+        ========================== */
+
+        /* =========================
+   GO TO CUPID
+========================= */
+
+function goTo() {
+
+    document
+        .getElementById("nextScreen")
+        .style.display = "none";
+
+    const birthdayLock =
+        document.getElementById(
+            "birthdayLockScreen"
+        );
+
+    birthdayLock.classList.add("show");
+}
+
+    function getSongStartSeconds(value) {
+
+    if (!value) {
+        return 0;
+    }
+
+    const parts = value.split(":");
+
+    const minutes =
+        parseInt(parts[0], 10) || 0;
+
+    const seconds =
+        parseInt(parts[1], 10) || 0;
+
+    return (minutes * 60) + seconds;
+    }
+      
+async function checkBirthdayDate() {
+
+    const day =
+        document.getElementById("birthdayDay").value.trim();
+
+    const month =
+        document.getElementById("birthdayMonth").value.trim();
+
+    const error =
+        document.getElementById("birthdayError");
+
+    if (!day || !month) {
+        error.textContent =
+            "💕 Please enter your birthday first.";
+        return;
+    }
+
+    const enteredBirthday =
+        day.padStart(2, "0") +
+        "/" +
+        month.padStart(2, "0");
+
+    let data = getBirthdayData();
+
+    /* If birthday data is not available locally,
+       load it directly from Supabase. */
+
+    if (!data.birthdayDate) {
+
+        const id =
+            new URLSearchParams(
+                window.location.search
+            ).get("id");
+
+        if (id && window.supabaseClient) {
+
+            const result =
+                await window.supabaseClient
+                    .from("birthday_surprises")
+                    .select("data")
+                    .eq("id", id)
+                    .single();
+
+            if (!result.error && result.data) {
+
+                data = result.data.data;
+
+                localStorage.setItem(
+                    "birthday_" + id,
+                    JSON.stringify(data)
+                );
+            }
+        }
+    }
+
+    const savedBirthday =
+        (data.birthdayDate || "")
+            .trim()
+            .replace(/\s/g, "")
+            .replace(/-/g, "/");
+
+    console.log("ENTERED:", enteredBirthday);
+    console.log("SAVED:", savedBirthday);
+    console.log("DATA:", data);
+  error.textContent =
+    "DEBUG — Entered: " +
+    enteredBirthday +
+    " | Saved: " +
+    savedBirthday;
+
+    if (enteredBirthday === savedBirthday) {
+
+        error.textContent = "";
+      
+      const birthdaySong =
+    document.getElementById("birthdaySong");
+
+if (birthdaySong && data.song) {
+
+    const startSeconds =
+        getSongStartSeconds(
+            data.songStartTime
+        );
+
+    birthdaySong.src = data.song;
+
+    birthdaySong.addEventListener(
+        "loadedmetadata",
+        function () {
+
+            birthdaySong.currentTime =
+                startSeconds;
+
+            birthdaySong.play().catch(
+                function (error) {
+                    console.log(
+                        "Song playback waiting:",
+                        error
+                    );
+                }
+            );
+
+        },
+        { once: true }
+    );
+
+  birthdaySong.onended = function () {
+
+    birthdaySong.currentTime =
+        getSongStartSeconds(
+            data.songStartTime
+        );
+
+    birthdaySong.play().catch(
+        function (error) {
+            console.log(
+                "Song replay waiting:",
+                error
+            );
+        }
+    );
+};
+}
+
+        const birthdayLock =
+            document.getElementById(
+                "birthdayLockScreen"
+            );
+
+        birthdayLock.classList.remove("show");
+        birthdayLock.style.display = "none";
+
+        const cupid =
+            document.getElementById("cupidScreen");
+
+        cupid.style.display = "flex";
+        cupid.classList.add("show");
+
+        startCupidGame();
+
+    } else {
+
+        error.textContent =
+            "💕 Hmm… that's not quite it. Try again.";
+
+        document.getElementById(
+            "birthdayDay"
+        ).value = "";
+
+        document.getElementById(
+            "birthdayMonth"
+        ).value = "";
+    }
+}
+
+        /* =========================
+           CUPID GAME
+        ========================== */
+
+        let completed = false;
+        let cupidStarted = false;
+
+
+        function startCupidGame() {
+
+            if (cupidStarted) {
+                return;
+            }
+
+            cupidStarted = true;
+
+
+            const game =
+                document.getElementById(
+                    "cupidGame"
+                );
+
+
+            const pullPoint =
+                document.getElementById(
+                    "pullPoint"
+                );
+
+
+            const arrow =
+                document.getElementById(
+                    "arrow"
+                );
+
+
+            const bowString =
+                document.getElementById(
+                    "bowString"
+                );
+
+
+            const pullText =
+                document.getElementById(
+                    "pullText"
+                );
+
+
+            const target =
+                document.getElementById(
+                    "targetHeart"
+                );
+
+
+            let dragging = false;
+
+
+            const startX = 75;
+            const startY = 235;
+
+
+            /* =========================
+               RESET ARROW
+            ========================== */
+
+            function resetArrow() {
+
+                pullPoint.style.left =
+                    startX + "px";
+
+
+                pullPoint.style.top =
+                    startY + "px";
+
+
+                arrow.style.left =
+                    "95px";
+
+
+                arrow.style.top =
+                    "218px";
+
+
+                arrow.style.transform =
+                    "rotate(-28deg)";
+
+
+                bowString.style.width =
+                    "95px";
+
+
+                bowString.style.transform =
+                    "rotate(-2deg)";
+
+
+                game.classList.remove(
+                    "cupid-pulling"
+                );
+
+
+                pullText.textContent =
+                    "PULL & RELEASE";
+            }
+
+
+            resetArrow();
+
+
+            /* =========================
+               START PULL
+            ========================== */
+
+            function beginPull(e) {
+
+                if (completed) {
+                    return;
+                }
+
+
+                e.preventDefault();
+
+
+                dragging = true;
+
+
+                game.classList.add(
+                    "cupid-pulling"
+                );
+
+
+                try {
+
+                    pullPoint.setPointerCapture(
+                        e.pointerId
+                    );
+
+                } catch (err) {}
+
+
+                pullText.textContent =
+                    "PULL BACK ❤️";
+            }
+
+
+            /* =========================
+               MOVE ARROW
+            ========================== */
+
+            function movePull(e) {
+
+                if (
+                    !dragging ||
+                    completed
+                ) {
+                    return;
+                }
+
+
+                e.preventDefault();
+
+
+                const rect =
+                    game.getBoundingClientRect();
+
+
+                let x =
+                    e.clientX - rect.left;
+
+
+                let y =
+                    e.clientY - rect.top;
+
+
+                x = Math.max(
+                    45,
+                    Math.min(x, 125)
+                );
+
+
+                y = Math.max(
+                    185,
+                    Math.min(y, 275)
+                );
+
+
+                pullPoint.style.left =
+                    (x - 35) + "px";
+
+
+                pullPoint.style.top =
+                    (y - 35) + "px";
+
+
+                arrow.style.left =
+                    (x - 5) + "px";
+
+
+                arrow.style.top =
+                    (y - 17) + "px";
+
+
+                const targetRect =
+                    target.getBoundingClientRect();
+
+
+                const arrowX =
+                    rect.left + x;
+
+
+                const arrowY =
+                    rect.top + y;
+
+
+                const targetX =
+                    targetRect.left +
+                    targetRect.width / 2;
+
+
+                const targetY =
+                    targetRect.top +
+                    targetRect.height / 2;
+
+
+                const angle =
+                    Math.atan2(
+                        targetY - arrowY,
+                        targetX - arrowX
+                    ) *
+                    180 /
+                    Math.PI;
+
+
+                arrow.style.transform =
+                    "rotate(" +
+                    angle +
+                    "deg)";
+
+
+                const stringLength =
+                    Math.max(
+                        55,
+                        Math.min(
+                            125,
+                            x + 20
+                        )
+                    );
+
+
+                bowString.style.width =
+                    stringLength + "px";
+
+
+                bowString.style.transform =
+                    "rotate(" +
+                    angle +
+                    "deg)";
+
+
+                pullText.textContent =
+                    "RELEASE TO SHOOT 💘";
+            }
+
+
+            /* =========================
+               RELEASE ARROW
+            ========================== */
+
+            function releaseArrow(e) {
+
+                if (
+                    !dragging ||
+                    completed
+                ) {
+                    return;
+                }
+
+
+                dragging = false;
+
+
+                try {
+
+                    pullPoint.releasePointerCapture(
+                        e.pointerId
+                    );
+
+                } catch (err) {}
+
+
+                game.classList.remove(
+                    "cupid-pulling"
+                );
+
+
+                const targetRect =
+                    target.getBoundingClientRect();
+
+
+                const arrowRect =
+                    arrow.getBoundingClientRect();
+
+
+                const arrowX =
+                    arrowRect.left +
+                    arrowRect.width / 2;
+
+
+                const arrowY =
+                    arrowRect.top +
+                    arrowRect.height / 2;
+
+
+                const targetX =
+                    targetRect.left +
+                    targetRect.width / 2;
+
+
+                const targetY =
+                    targetRect.top +
+                    targetRect.height / 2;
+
+
+                const distance =
+                    Math.hypot(
+                        targetX - arrowX,
+                        targetY - arrowY
+                    );
+
+
+                if (distance < 220) {
+
+                    completed = true;
+
+
+                    pullPoint.style.display =
+                        "none";
+
+
+                    pullText.textContent =
+                        "💘 LOVE HAS ARRIVED 💘";
+
+
+                    const dx =
+                        targetX - arrowX;
+
+
+                    const dy =
+                        targetY - arrowY;
+
+
+                    const angle =
+                        Math.atan2(
+                            dy,
+                            dx
+                        ) *
+                        180 /
+                        Math.PI;
+
+
+                    const travel =
+                        Math.sqrt(
+                            dx * dx +
+                            dy * dy
+                        );
+
+
+                    arrow.style.transform =
+                        "rotate(" +
+                        angle +
+                        "deg)";
+
+
+                    arrow.style.setProperty(
+                        "--arrow-distance",
+                        travel + "px"
+                    );
+
+
+                    arrow.style.setProperty(
+                        "--arrow-angle",
+                        angle + "deg"
+                    );
+
+
+                    arrow.classList.add(
+                        "arrow-flying"
+                    );
+
+
+                    /* HEART IMPACT */
+
+                    setTimeout(function () {
+
+                        target.classList.add(
+                            "heart-hit"
+                        );
+
+
+                        createHeartRain();
+
+                        createHeartExplosion();
+
+
+                        game.classList.add(
+                            "love-explosion"
+                        );
+
+                    }, 550);
+
+
+                    setTimeout(function () {
+
+                        pullText.textContent =
+                            "💖 LOVE EVERYWHERE 💖";
+
+                    }, 1100);
+
+
+                    setTimeout(function () {
+
+                        document
+                            .getElementById(
+                                "cupidScreen"
+                            )
+                            .classList.add(
+                                "cupid-complete"
+                            );
+
+                    }, 2300);
+
+
+                    /* GO TO BIRTHDAY REVEAL */
+
+                    setTimeout(function () {
+
+                        document
+                            .getElementById(
+                                "cupidScreen"
+                            )
+                            .style.display =
+                            "none";
+
+
+                        document
+                            .getElementById(
+                                "birthdayReveal"
+                            )
+                            .classList.add(
+                                "show"
+                            );
+
+
+                        document
+                            .getElementById(
+                                "revealName"
+                            )
+                            .textContent =
+                            data.recipient ||
+                            "YOU";
+
+                    }, 3300);
+
+
+                } else {
+
+                    pullText.textContent =
+                        "PULL A LITTLE FARTHER ❤️";
+
+
+                    arrow.classList.add(
+                        "arrow-return"
+                    );
+
+
+                    setTimeout(function () {
+
+                        arrow.classList.remove(
+                            "arrow-return"
+                        );
+
+
+                        resetArrow();
+
+                    }, 550);
+                }
+            }
+
+
+            /* =========================
+               TOUCH CONTROLS
+            ========================== */
+
+            pullPoint.addEventListener(
+                "pointerdown",
+                beginPull
+            );
+
+
+            pullPoint.addEventListener(
+                "pointermove",
+                movePull
+            );
+
+
+            pullPoint.addEventListener(
+                "pointerup",
+                releaseArrow
+            );
+
+
+            pullPoint.addEventListener(
+                "pointercancel",
+                releaseArrow
+            );
+
+
+            arrow.addEventListener(
+                "pointerdown",
+                beginPull
+            );
+        }
+
+        /* =========================
+           HEART RAIN
+        ========================== */
+
+        function createHeartRain() {
+
+            const rain =
+                document.createElement("div");
+
+            rain.className =
+                "heart-rain";
+
+            const hearts = [
+                "❤️",
+                "💖",
+                "💕",
+                "💗",
+                "💓",
+                "💘",
+                "💝",
+                "🤍"
+            ];
+
+            for (
+                let i = 0;
+                i < 55;
+                i++
+            ) {
+
+                const heart =
+                    document.createElement("span");
+
+                heart.textContent =
+                    hearts[
+                        Math.floor(
+                            Math.random() *
+                            hearts.length
+                        )
+                    ];
+
+                heart.style.left =
+                    Math.random() *
+                    100 +
+                    "%";
+
+                heart.style.animationDelay =
+                    Math.random() *
+                    1.5 +
+                    "s";
+
+                heart.style.animationDuration =
+                    2.5 +
+                    Math.random() *
+                    2.5 +
+                    "s";
+
+                heart.style.fontSize =
+                    14 +
+                    Math.random() *
+                    25 +
+                    "px";
+
+                heart.style.setProperty(
+                    "--drift",
+                    (
+                        Math.random() *
+                        160 -
+                        80
+                    ) +
+                    "px"
+                );
+
+                rain.appendChild(
+                    heart
+                );
+            }
+
+            document.body.appendChild(
+                rain
+            );
+
+            setTimeout(function () {
+
+                rain.remove();
+
+            }, 6000);
+        }
+
+
+        /* =========================
+           HEART EXPLOSION
+        ========================== */
+
+        function createHeartExplosion() {
+
+            const game =
+                document.getElementById(
+                    "cupidGame"
+                );
+
+            for (
+                let i = 0;
+                i < 28;
+                i++
+            ) {
+
+                const particle =
+                    document.createElement(
+                        "span"
+                    );
+
+                particle.className =
+                    "heart-particle";
+
+                particle.textContent =
+                    Math.random() > 0.5
+                        ? "💖"
+                        : "✨";
+
+                const angle =
+                    Math.random() *
+                    Math.PI *
+                    2;
+
+                const distance =
+                    80 +
+                    Math.random() *
+                    130;
+
+                particle.style.setProperty(
+                    "--x",
+                    Math.cos(angle) *
+                    distance +
+                    "px"
+                );
+
+                particle.style.setProperty(
+                    "--y",
+                    Math.sin(angle) *
+                    distance +
+                    "px"
+                );
+
+                game.appendChild(
+                    particle
+                );
+
+                setTimeout(function () {
+
+                    particle.remove();
+
+                }, 1400);
+            }
+        }
+
+/* =========================
+   TREE FIREWORKS
+========================= */
+
+function startTreeFireworks() {
+
+    const tree = document.getElementById("treeScreen");
+  createHeartTree();
+    const layer = document.getElementById("treeFireworksLayer");
+
+    if (!tree || !layer) return;
+
+    // Clear old fireworks
+    layer.innerHTML = "";
+
+    // Stop old timer
+    if (tree.treeFireworkTimer) {
+        clearInterval(tree.treeFireworkTimer);
+    }
+
+    function makeFirework() {
+
+        const firework = document.createElement("div");
+
+        firework.className = "tree-firework";
+
+        firework.style.left =
+            (10 + Math.random() * 80) + "%";
+
+        firework.style.top =
+            (8 + Math.random() * 48) + "%";
+
+        layer.appendChild(firework);
+
+        setTimeout(function () {
+            firework.remove();
+        }, 1800);
+    }
+
+    // First fireworks
+    for (let i = 0; i < 7; i++) {
+        setTimeout(makeFirework, i * 250);
+    }
+
+    // Continuous fireworks
+    tree.treeFireworkTimer =
+        setInterval(makeFirework, 850);
+}
+
+    /* =========================
+   BIRTHDAY CONTINUE
+========================= */
+function continueBirthday() {
+
+    const birthday =
+        document.getElementById("birthdayReveal");
+
+    const tree =
+        document.getElementById("treeScreen");
+
+    if (!birthday || !tree) return;
+
+    /* Prevent double tap */
+    if (birthday.dataset.transitioning === "true") {
+        return;
+    }
+
+    birthday.dataset.transitioning = "true";
+
+    const data = getBirthdayData();
+
+    /* Set tree name */
+    const treeName =
+        document.getElementById("treeName");
+
+    if (treeName) {
+        treeName.textContent =
+            data.recipient || "You";
+    }
+
+    /* Set age */
+    const treeAge =
+        document.getElementById("treeAge");
+
+    if (treeAge) {
+        treeAge.textContent =
+            data.age || "";
+    }
+
+    /* Create tree */
+    if (typeof createHeartTree === "function") {
+        createHeartTree();
+    }
+
+    /* Disable button */
+    const button =
+        birthday.querySelector("button");
+
+    if (button) {
+        button.disabled = true;
+        button.style.pointerEvents = "none";
+    }
+
+    /*
+       Put tree behind the current screen.
+       IMPORTANT: don't make it visible yet.
+    */
+
+    tree.style.display = "flex";
+    tree.style.visibility = "visible";
+    tree.style.zIndex = "400";
+    tree.style.opacity = "0";
+
+    birthday.style.zIndex = "500";
+
+    /* Reset animations */
+    birthday.classList.remove("close-eyes-out");
+    tree.classList.remove("close-eyes-tree");
+
+    void birthday.offsetWidth;
+    void tree.offsetWidth;
+
+    /*
+       Start both animations.
+    */
+
+    birthday.classList.add("close-eyes-out");
+
+    tree.classList.add("close-eyes-tree");
+
+    /*
+       Start tree effects after
+       the reveal has started.
+    */
+
+    setTimeout(function () {
+
+        if (typeof startTreeFireworks === "function") {
+            startTreeFireworks();
+        }
+
+    }, 900);
+
+    /*
+       Finish transition.
+    */
+
+    setTimeout(function () {
+
+        birthday.style.display = "none";
+        birthday.style.visibility = "hidden";
+
+        birthday.classList.remove("close-eyes-out");
+
+        tree.style.opacity = "";
+        tree.style.zIndex = "";
+
+        tree.classList.remove("close-eyes-tree");
+
+        birthday.dataset.transitioning = "false";
+
+        window.scrollTo(0, 0);
+
+    }, 1600);
+}
+
+/* =========================================================
+   CREATE MEMORY TREE
+   Uses the SAME 5 photos as Memory Lane
+========================================================= */
+
+function createHeartTree() {
+
+    const area =
+        document.getElementById("treeMemoryPhotos");
+
+    if (!area) return;
+
+    area.innerHTML = "";
+
+    const prayers = [
+        "🌸 May you always have a reason to smile.",
+        "💖 May your heart always be surrounded by love.",
+        "✨ May all your dreams slowly turn into reality.",
+        "🦋 May you always find happiness wherever life takes you.",
+        "🌙 May this new year of your life bring you peace, success, and beautiful memories."
+    ];
+
+    prayers.forEach(function (prayer, index) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "tree-memory-photo prayer-" + (index + 1);
+
+        const text =
+            document.createElement("div");
+
+        text.className =
+            "tree-prayer-text";
+
+        text.textContent =
+            prayer;
+
+        card.appendChild(text);
+
+        area.appendChild(card);
+    });
+}
+
+
+/* =========================
+   🌳 → 🎂 SMOOTH GO TO CAKE
+========================= */
+
+function goToCake() {
+
+    const tree = document.getElementById("treeScreen");
+    const cake = document.getElementById("cakeScreen");
+
+    if (!tree || !cake) return;
+
+    /* Prevent double tap */
+    if (tree.dataset.transitioning === "true") return;
+
+    tree.dataset.transitioning = "true";
+
+    /* Prepare cake */
+    cake.style.display = "flex";
+    cake.style.visibility = "visible";
+    cake.style.opacity = "0";
+    cake.style.transform = "scale(.96)";
+    cake.style.filter = "blur(8px)";
+    cake.style.zIndex = "501";
+
+    tree.style.zIndex = "500";
+
+    /* Give browser time to render cake's starting position */
+    requestAnimationFrame(function () {
+
+        requestAnimationFrame(function () {
+
+            /* TREE → fade + slight zoom */
+            tree.style.transition =
+                "opacity 1s cubic-bezier(.22,.61,.36,1), " +
+                "transform 1s cubic-bezier(.22,.61,.36,1), " +
+                "filter 1s ease";
+
+            tree.style.opacity = "0";
+            tree.style.transform = "scale(1.04)";
+            tree.style.filter = "blur(6px)";
+
+            /* CAKE → smooth arrival */
+            cake.style.transition =
+                "opacity 1.15s cubic-bezier(.22,.61,.36,1), " +
+                "transform 1.15s cubic-bezier(.22,.61,.36,1), " +
+                "filter 1.15s ease";
+
+            cake.style.opacity = "1";
+            cake.style.transform = "scale(1)";
+            cake.style.filter = "blur(0)";
+        });
+    });
+
+    /* Prepare cake balloons */
+    setTimeout(function () {
+
+        try {
+
+            if (typeof setupCakeFoilBalloons === "function") {
+                setupCakeFoilBalloons();
+            }
+
+        } catch (error) {
+            console.log("Cake setup skipped:", error);
+        }
+
+    }, 300);
+
+    /* Finish transition */
+    setTimeout(function () {
+
+        tree.style.display = "none";
+        tree.style.visibility = "hidden";
+
+        tree.style.opacity = "";
+        tree.style.transform = "";
+        tree.style.filter = "";
+        tree.style.zIndex = "";
+
+        cake.style.zIndex = "500";
+
+        window.scrollTo(0, 0);
+
+        tree.dataset.transitioning = "false";
+
+    }, 1200);
+}
+      
+    </script>
+
+<!-- CAKE  -->
+<section id="cakeScreen" class="cake-screen">
+  <!-- 🎂 Magical Cake Animation Layer -->
+<div id="cakeMagicLayer"></div>
+  <!-- REALISTIC HEART BALLOON CLUSTERS -->
+<div class="real-balloon real-balloon-left">
+    <img src="heart-balloon.png" alt="">
+</div>
+
+<div class="real-balloon real-balloon-right">
+    <img src="heart-balloon.png" alt="">
+</div>
+    <div class="cake-glow"></div>
+
+<!-- =====================================================
+     FOIL BALLOON PARTY HEADER
+     ===================================================== -->
+
+<div class="foil-party-header">
+
+    <!-- LEFT HEART BALLOONS -->
+    <div class="foil-heart-group foil-heart-left">
+
+        <div class="foil-heart fh-pink fh-big">
+            <span>♡</span>
+        </div>
+
+        <div class="foil-heart fh-purple fh-small fh-pos-2">
+            <span>♥</span>
+        </div>
+
+        <div class="foil-heart fh-blue fh-medium fh-pos-3">
+            <span>♡</span>
+        </div>
+
+        <div class="foil-heart fh-gold fh-small fh-pos-4">
+            <span>♥</span>
+        </div>
+
+        <div class="foil-heart fh-pink fh-medium fh-pos-5">
+            <span>♡</span>
+        </div>
+
+        <div class="foil-heart fh-purple fh-small fh-pos-6">
+            <span>♥</span>
+        </div>
+
+        <div class="foil-ribbon"></div>
+
+    </div>
+
+
+    <!-- =================================================
+         CENTER FOIL LETTERS
+         ================================================= -->
+
+    <div class="foil-center">
+
+        <div
+            class="foil-word foil-happy"
+            id="balloonHappy">
+        </div>
+
+        <div
+            class="foil-word foil-birthday"
+            id="balloonBirthday">
+        </div>
+
+        <div
+            class="foil-word foil-recipient"
+            id="balloonName">
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT HEART BALLOONS -->
+    <div class="foil-heart-group foil-heart-right">
+
+        <div class="foil-heart fh-gold fh-big">
+            <span>♡</span>
+        </div>
+
+        <div class="foil-heart fh-purple fh-small fh-pos-2">
+            <span>♥</span>
+        </div>
+
+        <div class="foil-heart fh-blue fh-medium fh-pos-3">
+            <span>♡</span>
+        </div>
+
+        <div class="foil-heart fh-pink fh-small fh-pos-4">
+            <span>♥</span>
+        </div>
+
+        <div class="foil-heart fh-blue fh-medium fh-pos-5">
+            <span>♡</span>
+        </div>
+
+        <div class="foil-heart fh-gold fh-small fh-pos-6">
+            <span>♥</span>
+        </div>
+
+        <div class="foil-ribbon"></div>
+
+    </div>
+
+</div>
+  
+    <div class="chocolate-cake">
+
+        <!-- floating decorations -->
+        <span class="cake-sparkle sparkle-one">✦</span>
+        <span class="cake-sparkle sparkle-two">✦</span>
+        <span class="cake-sparkle sparkle-three">♡</span>
+
+        <!-- candles -->
+        <div class="choco-candle candle-one">
+            <div class="real-flame"></div>
+        </div>
+
+        <div class="choco-candle candle-two">
+            <div class="real-flame"></div>
+        </div>
+
+        <div class="choco-candle candle-three">
+            <div class="real-flame"></div>
+        </div>
+
+        <!-- strawberries on top -->
+        <div class="strawberry strawberry-one">
+            <span>•</span><span>•</span><span>•</span>
+        </div>
+
+        <div class="strawberry strawberry-two">
+            <span>•</span><span>•</span><span>•</span>
+        </div>
+
+        <div class="strawberry strawberry-three">
+            <span>•</span><span>•</span><span>•</span>
+        </div>
+
+        <!-- whipped cream -->
+        <div class="cream-puff puff-one"></div>
+        <div class="cream-puff puff-two"></div>
+        <div class="cream-puff puff-three"></div>
+        <div class="cream-puff puff-four"></div>
+
+        <!-- top chocolate -->
+        <div class="choco-top">
+            <div class="ganache-shine"></div>
+
+            <span class="choco-piece piece-one"></span>
+            <span class="choco-piece piece-two"></span>
+            <span class="choco-piece piece-three"></span>
+            <span class="choco-piece piece-four"></span>
+            <span class="choco-piece piece-five"></span>
+        </div>
+
+        <!-- chocolate drip -->
+        <div class="choco-drip">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- upper cake layer -->
+        <div class="choco-layer upper-layer">
+
+            <div class="cream-line"></div>
+
+            <div class="chocolate-shavings">
+                <i></i><i></i><i></i>
+                <i></i><i></i><i></i>
+                <i></i><i></i>
+            </div>
+
+        </div>
+
+        <!-- cream filling -->
+        <div class="cake-filling"></div>
+
+        <!-- lower cake layer -->
+        <div class="choco-layer lower-layer">
+
+            <div class="lower-decoration">
+                <span>●</span>
+                <span>●</span>
+                <span>●</span>
+                <span>●</span>
+                <span>●</span>
+                <span>●</span>
+            </div>
+
+        </div>
+
+        <!-- cake board -->
+        <div class="cake-board">
+            <div class="board-shine"></div>
+        </div>
+
+    </div>
+
+    <p class="cake-wish">Make a wish 🕯️</p>
+
+    <button class="cake-button" onclick="blowCake()">
+    Blow the candles ✨
+</button>
+
+<div class="cake-knife" id="cakeKnife" onclick="cutCake()">
+    <div class="knife-moving">
+    <div class="knife-blade"></div>
+    <div class="knife-handle"></div>
+</div>
+
+<span>Tap to cut the cake ✨</span>
+</div>
+
+</section>
+
+  <section id="hopeScreen" class="hope-screen">
+
+    <div class="hope-glow"></div>
+
+    <p class="hope-small">
+        A FEW WISHES FOR YOU ✨
+    </p>
+
+    <h1 class="hope-title">
+        Things I Hope For You
+    </h1>
+
+    <div class="hope-lines">
+
+        <p>
+            I hope this year gives you<br>
+            more reasons to smile. 🌷
+        </p>
+
+        <p>
+            I hope you always remember<br>
+            how special you are. 💗
+        </p>
+
+        <p>
+            I hope life gives you back<br>
+            all the happiness you give to others. ✨
+        </p>
+
+    </div>
+
+    <button class="hope-button" onclick="goToBalloons()">
+        There's more for you 💕
+    </button>
+
+  </section>
+
+  <!-- BALLOON SCREEN -->
+<section id="balloonScreen" class="balloon-screen">
+  <div class="balloon-magic-bg" aria-hidden="true"></div>
+
+    <div class="balloon-glow"></div>
+
+    <p class="balloon-small">
+        FIVE LITTLE REASONS 💕
+    </p>
+
+    <h1 class="balloon-title">
+        Why You're So Special
+    </h1>
+
+    <p class="balloon-instruction">
+        Pop each balloon to find out 🎈
+    </p>
+
+        <div class="balloon-area">
+
+    <div class="birthday-balloon balloon-one"
+         onclick="popBalloon(this, 1)">
+        <img src="heart-pop-balloon.png" alt="Heart balloon">
+    </div>
+
+    <div class="birthday-balloon balloon-two"
+         onclick="popBalloon(this, 2)">
+        <img src="heart-pop-balloon.png" alt="Heart balloon">
+    </div>
+
+    <div class="birthday-balloon balloon-three"
+         onclick="popBalloon(this, 3)">
+        <img src="heart-pop-balloon.png" alt="Heart balloon">
+    </div>
+
+    <div class="birthday-balloon balloon-four"
+         onclick="popBalloon(this, 4)">
+        <img src="heart-pop-balloon.png" alt="Heart balloon">
+    </div>
+
+    <div class="birthday-balloon balloon-five"
+         onclick="popBalloon(this, 5)">
+        <img src="heart-pop-balloon.png" alt="Heart balloon">
+    </div>
+
+        </div>
+
+    <div class="balloon-reason" id="balloonReason"></div>
+
+</section>
+
+<!-- MEMORY LANE -->
+<section id="memoryScreen" class="memory-screen">
+
+    <!-- DREAMY BACKGROUND -->
+    <div class="memory-sky"></div>
+
+    <!-- MOON -->
+    <div class="memory-moon">
+        <div class="moon-glow"></div>
+        <div class="moon-shape"></div>
+    </div>
+
+    <!-- CLOUDS -->
+    <div class="memory-cloud cloud-one"></div>
+    <div class="memory-cloud cloud-two"></div>
+    <div class="memory-cloud cloud-three"></div>
+
+    <!-- STARS -->
+    <div class="memory-stars">
+        <span>✦</span>
+        <span>✧</span>
+        <span>✦</span>
+        <span>⋆</span>
+        <span>✧</span>
+        <span>✦</span>
+        <span>⋆</span>
+        <span>✧</span>
+        <span>✦</span>
+        <span>⋆</span>
+        <span>✧</span>
+        <span>✦</span>
+        <span>⋆</span>
+        <span>✧</span>
+        <span>✦</span>
+        <span>⋆</span>
+        <span>✧</span>
+        <span>✦</span>
+    </div>
+
+    <!-- GLOWING HEARTS -->
+    <div class="memory-hearts">
+        <span>♡</span>
+        <span>♥</span>
+        <span>♡</span>
+        <span>♥</span>
+        <span>♡</span>
+        <span>♥</span>
+        <span>♡</span>
+        <span>♥</span>
+    </div>
+
+    <!-- SPARKLE DOTS -->
+    <div class="memory-sparkles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- FLOWER DECORATIONS -->
+    <div class="memory-flower flower-left">🌸</div>
+    <div class="memory-flower flower-right">🌸</div>
+    <div class="memory-flower flower-bottom-left">🌷</div>
+    <div class="memory-flower flower-bottom-right">🌷</div>
+
+    <!-- HEADER -->
+    <div class="memory-header">
+
+        <p class="memory-small">
+            ✦ A LITTLE TRIP DOWN ✦
+        </p>
+
+        <h1 class="memory-title">
+            Memory Lane
+        </h1>
+
+        <div class="memory-heart-line">
+            ─── ♡ ───
+        </div>
+
+        <p class="memory-subtitle">
+            Some moments stay in our hearts forever...
+            <br>
+            and these are some of my favorite memories ♡
+        </p>
+
+    </div>
+
+    <!-- LITTLE CENTER HEART -->
+    <div class="memory-center-heart">
+        ♡
+    </div>
+
+    <!-- PHOTO AREA -->
+    <div
+        class="memory-photo-area"
+        id="memoryPhotoArea"
+    >
+    </div>
+
+    <!-- BOTTOM DECORATION -->
+    <div class="memory-note">
+        <span>♡</span>
+        <p>
+            Different days.<br>
+            Beautiful memories.<br>
+            Always special.
+        </p>
+        <span>♡</span>
+    </div>
+
+    <!-- CONTINUE -->
+    <div class="memory-button-area">
+
+        <div class="memory-button-glow"></div>
+
+        <button
+            class="memory-button"
+            onclick="goToLoveLetter()"
+        >
+            <span>♡</span>
+            Continue
+            <span>✉</span>
+        </button>
+
+    </div>
+
+</section>
+  
+<div id="birthdayMagic">
+
+    <div class="rocket rocket1">
+        <span class="rocket-trail"></span>
+        <span class="rocket-head"></span>
+    </div>
+
+    <div class="burst burst1"></div>
+
+
+    <div class="rocket rocket2">
+        <span class="rocket-trail"></span>
+        <span class="rocket-head"></span>
+    </div>
+
+    <div class="burst burst2"></div>
+
+
+    <div class="rocket rocket3">
+        <span class="rocket-trail"></span>
+        <span class="rocket-head"></span>
+    </div>
+
+    <div class="burst burst3"></div>
+
+
+    <div class="rocket rocket4">
+        <span class="rocket-trail"></span>
+        <span class="rocket-head"></span>
+    </div>
+
+    <div class="burst burst4"></div>
+
+
+    <div class="rocket rocket5">
+        <span class="rocket-trail"></span>
+        <span class="rocket-head"></span>
+    </div>
+
+    <div class="burst burst5"></div>
+
+  <div class="firework-pop" style="left:12%; top:22%; color:#ff4d9d; animation-delay:0s;"></div>
+<div class="firework-pop" style="left:28%; top:38%; color:#59c7ff; animation-delay:.6s;"></div>
+<div class="firework-pop" style="left:45%; top:18%; color:#ffd34d; animation-delay:1.2s;"></div>
+<div class="firework-pop" style="left:63%; top:32%; color:#c477ff; animation-delay:.3s;"></div>
+<div class="firework-pop" style="left:82%; top:20%; color:#ff765c; animation-delay:.9s;"></div>
+<div class="firework-pop" style="left:20%; top:58%; color:#ff8acb; animation-delay:1.5s;"></div>
+<div class="firework-pop" style="left:52%; top:48%; color:#8de8ff; animation-delay:.4s;"></div>
+<div class="firework-pop" style="left:76%; top:55%; color:#ffe477; animation-delay:1.8s;"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+  <script>
+/* =====================================================
+   REALISTIC INFLATED FOIL HEART BALLOONS
+   SIDES ONLY
+   ===================================================== */
+
+function drawFoilHeartBalloon(holder, baseColor, rotation) {
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = 240;
+    canvas.height = 270;
+
+    canvas.className = "real-foil-heart";
+
+    const ctx = canvas.getContext("2d");
+
+    const cx = 120;
+    const cy = 118;
+
+    /* ---------- HEART PATH ---------- */
+
+    function heartPath(scale) {
+
+        ctx.beginPath();
+
+        for (let i = 0; i <= 360; i++) {
+
+            const t = i * Math.PI / 180;
+
+            const x =
+                16 * Math.pow(Math.sin(t), 3);
+
+            const y =
+                -(13 * Math.cos(t)
+                - 5 * Math.cos(2 * t)
+                - 2 * Math.cos(3 * t)
+                - Math.cos(4 * t));
+
+            const px = cx + x * scale;
+            const py = cy + y * scale;
+
+            if (i === 0) {
+                ctx.moveTo(px, py);
+            } else {
+                ctx.lineTo(px, py);
+            }
+        }
+
+        ctx.closePath();
+    }
+
+
+    /* ---------- SHADOW ---------- */
+
+    ctx.save();
+
+    heartPath(5.25);
+
+    ctx.shadowColor = "rgba(0,0,0,.55)";
+    ctx.shadowBlur = 18;
+    ctx.shadowOffsetY = 14;
+
+    ctx.fillStyle = baseColor;
+    ctx.fill();
+
+    ctx.restore();
+
+
+    /* ---------- MAIN INFLATED BODY ---------- */
+
+    heartPath(5.25);
+
+    const body = ctx.createRadialGradient(
+        82, 72, 5,
+        120, 125, 145
+    );
+
+    body.addColorStop(0, "#ffffff");
+    body.addColorStop(.055, lightenColor(baseColor, .7));
+    body.addColorStop(.16, baseColor);
+    body.addColorStop(.52, baseColor);
+    body.addColorStop(.78, darkenColor(baseColor, .45));
+    body.addColorStop(1, "#241024");
+
+    ctx.fillStyle = body;
+    ctx.fill();
+
+
+    /* ---------- OUTER FOIL EDGE ---------- */
+
+    heartPath(5.25);
+
+    ctx.lineWidth = 5;
+
+    ctx.strokeStyle = "rgba(255,255,255,.58)";
+    ctx.stroke();
+
+
+    /* ---------- LEFT CURVED REFLECTION ---------- */
+
+    ctx.save();
+
+    heartPath(5.15);
+    ctx.clip();
+
+    const leftShine = ctx.createLinearGradient(
+        20, 20,
+        105, 190
+    );
+
+    leftShine.addColorStop(0,
+        "rgba(255,255,255,.9)");
+
+    leftShine.addColorStop(.08,
+        "rgba(255,255,255,.5)");
+
+    leftShine.addColorStop(.18,
+        "rgba(255,255,255,.15)");
+
+    leftShine.addColorStop(.32,
+        "rgba(255,255,255,0)");
+
+    ctx.fillStyle = leftShine;
+
+    ctx.fillRect(0, 0, 240, 270);
+
+    ctx.restore();
+
+
+    /* ---------- RIGHT REFLECTION ---------- */
+
+    ctx.save();
+
+    heartPath(5.15);
+    ctx.clip();
+
+    const rightShine = ctx.createLinearGradient(
+        180, 50,
+        120, 190
+    );
+
+    rightShine.addColorStop(0,
+        "rgba(255,255,255,.35)");
+
+    rightShine.addColorStop(.18,
+        "rgba(255,255,255,.08)");
+
+    rightShine.addColorStop(.45,
+        "rgba(255,255,255,0)");
+
+    ctx.fillStyle = rightShine;
+
+    ctx.fillRect(0, 0, 240, 270);
+
+    ctx.restore();
+
+
+    /* ---------- BIG SPECULAR HIGHLIGHT ---------- */
+
+    const highlight = ctx.createRadialGradient(
+        73, 63, 2,
+        73, 63, 48
+    );
+
+    highlight.addColorStop(0,
+        "rgba(255,255,255,.95)");
+
+    highlight.addColorStop(.15,
+        "rgba(255,255,255,.7)");
+
+    highlight.addColorStop(.38,
+        "rgba(255,255,255,.22)");
+
+    highlight.addColorStop(1,
+        "rgba(255,255,255,0)");
+
+    ctx.save();
+
+    heartPath(5.15);
+    ctx.clip();
+
+    ctx.fillStyle = highlight;
+
+    ctx.beginPath();
+    ctx.ellipse(
+        72,
+        62,
+        22,
+        38,
+        -0.55,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+
+    /* ---------- SECOND SMALL HIGHLIGHT ---------- */
+
+    const smallGlow = ctx.createRadialGradient(
+        105, 44, 1,
+        105, 44, 22
+    );
+
+    smallGlow.addColorStop(0,
+        "rgba(255,255,255,.75)");
+
+    smallGlow.addColorStop(1,
+        "rgba(255,255,255,0)");
+
+    ctx.save();
+
+    heartPath(5.15);
+    ctx.clip();
+
+    ctx.fillStyle = smallGlow;
+
+    ctx.beginPath();
+    ctx.arc(105, 44, 22, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+
+
+    /* ---------- FOIL CREASES ---------- */
+
+    ctx.save();
+
+    ctx.globalAlpha = .18;
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+    ctx.moveTo(55, 75);
+    ctx.bezierCurveTo(
+        70, 95,
+        75, 130,
+        82, 170
+    );
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(185, 75);
+    ctx.bezierCurveTo(
+        170, 98,
+        164, 132,
+        158, 170
+    );
+    ctx.stroke();
+
+    ctx.restore();
+
+
+    /* ---------- CENTER SOFT BULGE ---------- */
+
+    const bulge = ctx.createRadialGradient(
+        120, 110, 5,
+        120, 110, 75
+    );
+
+    bulge.addColorStop(0,
+        "rgba(255,255,255,.16)");
+
+    bulge.addColorStop(.5,
+        "rgba(255,255,255,.04)");
+
+    bulge.addColorStop(1,
+        "rgba(255,255,255,0)");
+
+    ctx.save();
+
+    heartPath(5.15);
+    ctx.clip();
+
+    ctx.fillStyle = bulge;
+    ctx.fillRect(0, 0, 240, 270);
+
+    ctx.restore();
+
+
+    /* ---------- KNOT ---------- */
+
+    ctx.beginPath();
+
+    ctx.moveTo(111, 218);
+    ctx.lineTo(120, 232);
+    ctx.lineTo(129, 218);
+    ctx.closePath();
+
+    ctx.fillStyle = darkenColor(baseColor, .35);
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(255,255,255,.45)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+
+    /* ---------- STRING ---------- */
+
+    ctx.beginPath();
+
+    ctx.moveTo(120, 231);
+
+    ctx.bezierCurveTo(
+        108, 244,
+        132, 252,
+        120, 268
+    );
+
+    ctx.strokeStyle = "rgba(255,255,255,.75)";
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+
+
+    /* ---------- PUT INTO HTML ---------- */
+
+    canvas.style.setProperty(
+        "--balloon-rotation",
+        rotation + "deg"
+    );
+
+    holder.innerHTML = "";
+    holder.appendChild(canvas);
+}
+
+
+/* COLOR HELPERS */
+
+function lightenColor(hex, amount) {
+
+    const c = hex.replace("#", "");
+
+    const r = parseInt(c.substring(0,2),16);
+    const g = parseInt(c.substring(2,4),16);
+    const b = parseInt(c.substring(4,6),16);
+
+    return `rgb(
+        ${Math.min(255,r + 70)},
+        ${Math.min(255,g + 70)},
+        ${Math.min(255,b + 70)}
+    )`;
+}
+
+
+function darkenColor(hex, amount) {
+
+    const c = hex.replace("#", "");
+
+    const r = parseInt(c.substring(0,2),16);
+    const g = parseInt(c.substring(2,4),16);
+    const b = parseInt(c.substring(4,6),16);
+
+    return `rgb(
+        ${Math.max(0,r - 70)},
+        ${Math.max(0,g - 70)},
+        ${Math.max(0,b - 70)}
+    )`;
+}
+
+
+/* ---------- SIDE BALLOONS ---------- */
+
+function setupBeautifulSideBalloons() {
+
+    const left =
+        document.querySelector(".foil-heart-left");
+
+    const right =
+        document.querySelector(".foil-heart-right");
+
+    if (!left || !right) return;
+
+
+    const leftColors = [
+        "#f52b82",
+        "#8745ed",
+        "#18b9e8",
+        "#ffc928",
+        "#f52b82",
+        "#8745ed"
+    ];
+
+    const rightColors = [
+        "#ffc928",
+        "#8745ed",
+        "#18b9e8",
+        "#f52b82",
+        "#18b9e8",
+        "#ffc928"
+    ];
+
+
+    left.querySelectorAll(".foil-heart")
+        .forEach((el, i) => {
+
+            const rotations =
+                [-12, 8, -7, 10, -9, 7];
+
+            drawFoilHeartBalloon(
+                el,
+                leftColors[i],
+                rotations[i]
+            );
+        });
+
+
+    right.querySelectorAll(".foil-heart")
+        .forEach((el, i) => {
+
+            const rotations =
+                [10, -8, 7, -10, 8, -7];
+
+            drawFoilHeartBalloon(
+                el,
+                rightColors[i],
+                rotations[i]
+            );
+        });
+}
+
+
+setupBeautifulSideBalloons();
+  </script>
+
+  
+  <!-- LOVE LETTER — SEALED ENVELOPE -->
+<section id="loveLetterScreen" class="love-letter-screen">
+
+    <!-- Background sparkles -->
+    <div class="letter-sparkles">
+        <span>✦</span>
+        <span>✧</span>
+        <span>♡</span>
+        <span>⋆</span>
+        <span>✦</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>⋆</span>
+    </div>
+
+    <!-- Heading -->
+    <div class="sealed-letter-heading">
+
+        <p>✦ SOMETHING FROM MY HEART ✦</p>
+
+        <h1>
+            A little letter<br>
+            <span>just for you</span>
+        </h1>
+
+        <div class="heading-heart">
+            ─── ♡ ───
+        </div>
+
+    </div>
+
+
+  <!-- ENVELOPE -->
+<div class="sealed-envelope-area">
+
+    <div class="new-envelope">
+
+        <div class="new-envelope-shadow"></div>
+
+        <div class="new-envelope-body">
+
+            <!-- inside paper -->
+            <div class="new-envelope-paper"></div>
+
+            <!-- left side -->
+            <div class="new-envelope-left"></div>
+
+            <!-- right side -->
+            <div class="new-envelope-right"></div>
+
+            <!-- bottom flap -->
+            <div class="new-envelope-bottom"></div>
+
+            <!-- TOP FLAP -->
+<div class="new-envelope-top"></div>
+
+
+<!-- LETTER INSIDE ENVELOPE -->
+<div class="hidden-letter" id="hiddenLetter">
+
+    <div class="letter-paper">
+
+        <div class="letter-paper-inner">
+
+            <div class="letter-writing" id="letterWriting"></div>
+
+            <div class="writing-cursor" id="writingCursor">✒</div>
+           <button class="letter-continue-button"
+        id="letterContinueButton"
+        onclick="goToFinalGift()"
+        style="display:none;">
+     ✨ One Last Thing… ✨
+           </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+            <!-- wax seal -->
+            <div class="heart-seal">
+                <div class="seal-heart">♥</div>
+                <div class="seal-text">With Love</div>
+                <div class="seal-sender" id="sealSender">Someone</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="seal-instruction">
+        <div class="instruction-heart">♡</div>
+        <p>Something special is waiting inside...</p>
+        <span>Scratch the seal to open 💕</span>
+        </div>
+
+</div>
+</section>
+
+
+
+<!-- ============================= -->
+<!-- FINAL GIFT — ONE LAST THING -->
+<!-- ============================= -->
+
+<section id="finalGiftScreen" class="final-gift-screen">
+
+    <!-- dreamy background -->
+    <div class="final-sky"></div>
+
+    <!-- stars -->
+    <div class="final-stars">
+        <span>✦</span>
+        <span>✧</span>
+        <span>⋆</span>
+        <span>✦</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>⋆</span>
+        <span>✦</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>⋆</span>
+        <span>✦</span>
+    </div>
+
+    <!-- floating hearts -->
+    <div class="final-hearts">
+        <span>♡</span>
+        <span>♥</span>
+        <span>♡</span>
+        <span>♥</span>
+        <span>♡</span>
+        <span>♥</span>
+        <span>♡</span>
+    </div>
+
+
+    <!-- FIRST SCREEN -->
+    <div class="final-intro" id="finalIntro">
+
+        <p class="final-kicker">✦ ONE LAST LITTLE SURPRISE ✦</p>
+
+        <h1>
+            One Last<br>
+            <span>Thing...</span>
+        </h1>
+
+        <div class="final-heart-line">
+            ─── ♡ ───
+        </div>
+
+        <p class="final-subtitle">
+            There's one more little surprise<br>
+            waiting for you...
+        </p>
+
+
+        <!-- gift -->
+<div class="final-gift-wrap"
+     onclick="openFinalGift()">
+
+    <div class="final-gift-glow"></div>
+
+    <div class="real-gift-stage">
+
+        <!-- CLOSED GIFT -->
+        <img
+            src="gift-closed.png"
+            class="real-gift-closed"
+            id="realGiftClosed"
+            alt="Gift">
+
+        <!-- OPEN BOX -->
+        <img
+            src="gift-body-open.png"
+            class="real-gift-body"
+            id="realGiftBody"
+            alt="Open gift">
+
+        <!-- LID + BOW -->
+        <img
+            src="gift-lid.png"
+            class="real-gift-lid"
+            id="realGiftLid"
+            alt="Gift lid">
+
+        <!-- MAGICAL LIGHT -->
+        <img
+            src="gift-light.png"
+            class="gift-opening-light"
+            id="giftOpeningLight"
+            alt="Magical light">
+
+        <!-- BUNNY -->
+        <img
+            src="bunny-magic.png"
+            class="gift-bunny-magic"
+            id="giftBunnyMagic"
+            alt="Magical bunny">
+
+         
+
+        <!-- SPARKLES -->
+        <img
+            src="gift-sparkles.png"
+            class="gift-opening-sparkles"
+            id="giftOpeningSparkles"
+            alt="Sparkles">
+
+        <!-- GOLDEN LIGHT -->
+        <div
+            class="real-gift-light"
+            id="realGiftLight">
+        </div>
+
+        <!-- HEARTS + STARS -->
+        <div
+            class="real-gift-sparkles"
+            id="realGiftSparkles">
+
+            <span>♡</span>
+            <span>✦</span>
+            <span>♥</span>
+            <span>✧</span>
+            <span>♡</span>
+            <span>⋆</span>
+            <span>✦</span>
+            <span>♥</span>
+            <span>♡</span>
+            <span>✧</span>
+            <span>✦</span>
+            <span>♡</span>
+
+        </div>
+
+    </div>
+
+    <p class="final-tap-text">
+        Tap the gift ♡
+    </p>
+
+</div>
+
+</div> <!-- final-intro -->
+
+
+<!-- ============================= -->
+<!-- BIRTHDAY REVEAL -->
+<!-- ============================= -->
+
+<div class="final-reveal" id="finalReveal">
+
+    <div class="celebration-background"></div>
+
+    <div class="celebration-heart-wrap">
+
+<svg class="purple-heart-glow"
+     viewBox="0 0 300 280"
+     aria-hidden="true">
+
+    <defs>
+        <filter id="purpleGlowFilter"
+                x="-60%"
+                y="-60%"
+                width="220%"
+                height="220%">
+
+            <feGaussianBlur
+                stdDeviation="7"
+                result="blur1"/>
+
+            <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="2"
+                result="blur2"/>
+
+            <feMerge>
+                <feMergeNode in="blur1"/>
+                <feMergeNode in="blur2"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+
+        </filter>
+    </defs>
+
+    <path
+        d="M150 270
+           C132 250 35 190 25 105
+           C18 45 82 15 125 48
+           C140 59 150 76 150 76
+           C150 76 160 59 175 48
+           C218 15 282 45 275 105
+           C265 190 168 250 150 270 Z"
+        fill="none"
+        stroke="#b76cff"
+        stroke-width="8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        filter="url(#purpleGlowFilter)"/>
+</svg>
+
+    <div class="celebration-message">
+
+        <p class="celebration-love">
+            Lots of love for you ❤️
+        </p>
+
+        <h2>
+            Once again, Happy Birthday,
+            <span id="finalBirthdayName">YOU</span>
+        </h2>
+
+        <p class="celebration-closing">
+            I hope this little surprise made you smile 
+        </p>
+
+    </div>
+
+    </div>
+
+    <button class="final-replay-button"
+            onclick="replayBirthday()">
+        ↻ Replay the magic ♡
+    </button>
+
+</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
+<script>
+(async function loadOnlineSurprise() {
+
+    const id =
+        new URLSearchParams(
+            window.location.search
+        ).get("id");
+
+    if (!id) {
+        console.log("No surprise ID.");
+        return;
+    }
+
+    console.log("Loading surprise:", id);
+
+    const SUPABASE_URL =
+        "https://myzbmxzzggbojhwbuncu.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_kuR_1pYnVMJmOsLSXEiajg_oQ4_HD36";
+
+    try {
+
+        const response = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/birthday_surprises" +
+            "?id=eq." +
+            encodeURIComponent(id) +
+            "&select=data",
+            {
+                method: "GET",
+
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization":
+                        "Bearer " + SUPABASE_KEY
+                }
+            }
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Supabase returned HTTP " +
+                response.status
+            );
+        }
+
+        const result =
+            await response.json();
+
+        if (
+            !result.length ||
+            !result[0].data
+        ) {
+
+            throw new Error(
+                "Surprise data was not found."
+            );
+        }
+
+        const birthdayData =
+            result[0].data;
+
+        console.log(
+            "Online surprise loaded:",
+            birthdayData
+        );
+
+        /* Save data on this phone */
+
+        localStorage.setItem(
+            "birthday_" + id,
+            JSON.stringify(birthdayData)
+        );
+
+        localStorage.setItem(
+            "lastSurpriseId",
+            id
+        );
+
+        /* Update recipient */
+
+        const recipient =
+            document.getElementById(
+                "recipientName"
+            );
+
+        if (recipient) {
+
+            recipient.textContent =
+                birthdayData.recipient || "YOU";
+        }
+
+        /* Update sender */
+
+        const sender =
+            document.getElementById(
+                "senderName"
+            );
+
+        if (sender) {
+
+            sender.textContent =
+                birthdayData.sender || "Someone";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Could not load online surprise:",
+            error
+        );
+
+        alert(
+            "Could not load this surprise. Please check your internet connection."
+        );
+    }
+
+})();
+</script>
+
+</body>
+</html>
